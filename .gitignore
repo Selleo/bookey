@@ -31,3 +31,6 @@
 /config/master.key
 
 .idea
+
+# Use database.yml.example as template
+/config/database.yml
