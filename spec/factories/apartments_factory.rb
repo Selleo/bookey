@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :apartment do
     name 'Presidential suite'
-    sequence(:uid) { |n| "room-#{n}"}
+    sequence(:uid) { |n| "room-#{n}" }
     hotel
 
     trait :with_parent do
