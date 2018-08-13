@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_080127) do
+ActiveRecord::Schema.define(version: 2018_08_13_093420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2018_08_13_080127) do
     t.datetime "updated_at", null: false
     t.index ["hotel_id"], name: "index_apartments_on_hotel_id"
     t.index ["parent_apartment_id"], name: "index_apartments_on_parent_apartment_id"
+  end
+
+  create_table "blocked_dates", force: :cascade do |t|
+    t.date "from", null: false
+    t.date "to", null: false
+    t.integer "reservation_ids", null: false, array: true
+    t.bigint "apartment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["apartment_id"], name: "index_blocked_dates_on_apartment_id"
   end
 
   create_table "guest_reservations", force: :cascade do |t|
@@ -62,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_08_13_080127) do
 
   add_foreign_key "apartments", "apartments", column: "parent_apartment_id"
   add_foreign_key "apartments", "hotels"
+  add_foreign_key "blocked_dates", "apartments"
   add_foreign_key "guest_reservations", "apartments"
   add_foreign_key "guest_reservations", "guests"
   add_foreign_key "guest_reservations", "reservations"
